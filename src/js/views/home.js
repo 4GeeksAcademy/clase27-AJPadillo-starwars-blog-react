@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Navigate } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
@@ -48,6 +47,10 @@ export const Home = () => {
 		"Sail barge": "https://starwars-visualguide.com/assets/img/vehicles/24.jpg"
 	};
 
+	const handleLearnMore = (item) => {
+        navigate('/info', { state: item });
+    };
+
 	return (
 		<>
 			<div className="container">
@@ -64,7 +67,7 @@ export const Home = () => {
 									<p className="card-text">Eye color: {item.eye_color}</p>
 									<div className="d-flex justify-content-around">
 										<Link>
-											<button href="#" className="btn btn-primary">Learn more!</button>
+											<button onClick={() => handleLearnMore(item)} className="btn btn-primary">Learn more!</button>
 										</Link>
 										<button href="#" className="btn btn-warning">Favorites</button>
 									</div>
@@ -87,7 +90,7 @@ export const Home = () => {
 									<p className="card-text">Terrain: {item.terrain}</p>
 									<div className="d-flex justify-content-around">
 										<Link>
-											<button href="#" className="btn btn-primary">Learn more!</button>
+											<button onClick={() => handleLearnMore(item)} className="btn btn-primary">Learn more!</button>
 										</Link>
 										<button href="#" className="btn btn-warning">Favorites</button>
 									</div>
@@ -110,7 +113,7 @@ export const Home = () => {
 									<p className="card-text">Consumables: {item.consumables}</p>
 									<div className="d-flex justify-content-around">
 										<Link>
-											<button href="#" className="btn btn-primary">Learn more!</button>
+											<button onClick={() => handleLearnMore(item)} className="btn btn-primary">Learn more!</button>
 										</Link>
 										<button href="#" className="btn btn-warning">Favorites</button>
 									</div>
