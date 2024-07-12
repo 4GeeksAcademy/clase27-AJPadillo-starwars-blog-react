@@ -47,28 +47,32 @@ export const Home = () => {
 		"Sail barge": "https://starwars-visualguide.com/assets/img/vehicles/24.jpg"
 	};
 
-	const handleLearnMore = (item) => {
-        navigate('/info', { state: item });
-    };
+	const handleCharacters = (item) => {
+		navigate('/infoCharacters', { state: item });
+	};
+	const handlePlanets = (item) => {
+		navigate('/infoPlanets', { state: item });
+	};
+	const handleVehicles = (item) => {
+		navigate('/infoVehicles', { state: item });
+	};
 
 	return (
 		<>
 			<div className="container">
-				<h1 className="text-danger">Characters</h1>
+				<h1 className="text-danger mb-4">Characters</h1>
 				<div className="row">
 					{store.personas.map((item, index) =>
 						<div className="col-md-3" key={index}>
-							<div className="card">
-								<img src={imageMapCharacters[item.name]} className="card-img-top overflow-hidden" style={{ maxWidth: "auto", maxHeight: "400px" }} />
+							<div className="card" style={{height: "100%"}}>
+								<img src={imageMapCharacters[item.name]} className="card-img-top" alt="..."/>
 								<div className="card-body">
 									<h5 className="card-title">{item.name}</h5>
 									<p className="card-text">Gender: {item.gender}</p>
 									<p className="card-text">Hair color: {item.hair_color}</p>
 									<p className="card-text">Eye color: {item.eye_color}</p>
 									<div className="d-flex justify-content-around">
-										<Link>
-											<button onClick={() => handleLearnMore(item)} className="btn btn-primary">Learn more!</button>
-										</Link>
+										<button onClick={() => handleCharacters(item)} className="btn btn-primary">Learn more!</button>
 										<button href="#" className="btn btn-warning">Favorites</button>
 									</div>
 								</div>
@@ -78,20 +82,18 @@ export const Home = () => {
 				</div>
 			</div>
 			<div className="container">
-				<h1 className="text-danger">Planets</h1>
+				<h1 className="text-danger mb-4">Planets</h1>
 				<div className="row">
 					{store.planetas.map((item, index) =>
 						<div className="col-md-3" key={index}>
-							<div className="card">
-								<img src={imageMapPlanets[item.name]} className="card-img-top overflow-hidden" style={{ maxWidth: "auto", maxHeight: "400px" }} />
+							<div className="card" style={{height: "100%"}}>
+								<img src={imageMapPlanets[item.name]} className="card-img-top" alt="..."/>
 								<div className="card-body">
 									<h5 className="card-title">{item.name}</h5>
 									<p className="card-text">Population: {item.population}</p>
 									<p className="card-text">Terrain: {item.terrain}</p>
 									<div className="d-flex justify-content-around">
-										<Link>
-											<button onClick={() => handleLearnMore(item)} className="btn btn-primary">Learn more!</button>
-										</Link>
+										<button onClick={() => handlePlanets(item)} className="btn btn-primary">Learn more!</button>
 										<button href="#" className="btn btn-warning">Favorites</button>
 									</div>
 								</div>
@@ -101,20 +103,18 @@ export const Home = () => {
 				</div>
 			</div>
 			<div className="container">
-				<h1 className="text-danger">Vehicles</h1>
+				<h1 className="text-danger mb-4">Vehicles</h1>
 				<div className="row">
 					{store.vehiculos.map((item, index) =>
 						<div className="col-md-3" key={index}>
-							<div className="card">
-								<img src={imageMapVehicles[item.name]} className="card-img-top overflow-hidden" style={{ maxWidth: "auto", maxHeight: "400px" }} />
-								<div className="card-body">
+							<div className="card" style={{height: "100%"}}>
+								<img src={imageMapVehicles[item.name]} className="card-img-top" alt="..." />
+								<div className="card-body" >
 									<h5 className="card-title">{item.name}</h5>
 									<p className="card-text">Model: {item.model}</p>
-									<p className="card-text">Consumables: {item.consumables}</p>
+									<p className="card-text">Length: {item.length}</p>
 									<div className="d-flex justify-content-around">
-										<Link>
-											<button onClick={() => handleLearnMore(item)} className="btn btn-primary">Learn more!</button>
-										</Link>
+										<button onClick={() => handleVehicles(item)} className="btn btn-primary">Learn more!</button>
 										<button href="#" className="btn btn-warning">Favorites</button>
 									</div>
 								</div>
