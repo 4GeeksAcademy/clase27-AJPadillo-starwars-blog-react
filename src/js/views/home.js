@@ -61,11 +61,11 @@ export const Home = () => {
 		<>
 			<div className="container">
 				<h1 className="text-danger mb-4">Characters</h1>
-				<div className="row">
+				<div className="row d-flex flex-nowrap flex-row overflow-scroll">
 					{store.personas.map((item, index) =>
 						<div className="col-md-3" key={index}>
-							<div className="card" style={{height: "100%"}}>
-								<img src={imageMapCharacters[item.name]} className="card-img-top" alt="..."/>
+							<div className="card" style={{ height: "100%" }}>
+								<img src={imageMapCharacters[item.name]} className="card-img-top" alt="..." />
 								<div className="card-body">
 									<h5 className="card-title">{item.name}</h5>
 									<p className="card-text">Gender: {item.gender}</p>
@@ -73,7 +73,7 @@ export const Home = () => {
 									<p className="card-text">Eye color: {item.eye_color}</p>
 									<div className="d-flex justify-content-around">
 										<button onClick={() => handleCharacters(item)} className="btn btn-primary">Learn more!</button>
-										<button href="#" className="btn btn-warning">Favorites</button>
+										<button onClick={() => actions.toggleFavorites(`character-${item.uid}`, item.name)} className="btn btn-warning">Favorites</button>
 									</div>
 								</div>
 							</div>
@@ -83,18 +83,18 @@ export const Home = () => {
 			</div>
 			<div className="container">
 				<h1 className="text-danger mb-4">Planets</h1>
-				<div className="row">
+				<div className="row d-flex flex-nowrap flex-row overflow-scroll">
 					{store.planetas.map((item, index) =>
 						<div className="col-md-3" key={index}>
-							<div className="card" style={{height: "100%"}}>
-								<img src={imageMapPlanets[item.name]} className="card-img-top" alt="..."/>
+							<div className="card" style={{ height: "100%" }}>
+								<img src={imageMapPlanets[item.name]} className="card-img-top" alt="..." />
 								<div className="card-body">
 									<h5 className="card-title">{item.name}</h5>
 									<p className="card-text">Population: {item.population}</p>
 									<p className="card-text">Terrain: {item.terrain}</p>
 									<div className="d-flex justify-content-around">
 										<button onClick={() => handlePlanets(item)} className="btn btn-primary">Learn more!</button>
-										<button href="#" className="btn btn-warning">Favorites</button>
+										<button onClick={() => actions.toggleFavorites(`planet-${item.uid}`, item.name)} className="btn btn-warning">Favorites</button>
 									</div>
 								</div>
 							</div>
@@ -104,10 +104,10 @@ export const Home = () => {
 			</div>
 			<div className="container">
 				<h1 className="text-danger mb-4">Vehicles</h1>
-				<div className="row">
+				<div className="row d-flex flex-nowrap flex-row overflow-scroll">
 					{store.vehiculos.map((item, index) =>
 						<div className="col-md-3" key={index}>
-							<div className="card" style={{height: "100%"}}>
+							<div className="card" style={{ height: "100%" }}>
 								<img src={imageMapVehicles[item.name]} className="card-img-top" alt="..." />
 								<div className="card-body" >
 									<h5 className="card-title">{item.name}</h5>
@@ -115,7 +115,7 @@ export const Home = () => {
 									<p className="card-text">Length: {item.length}</p>
 									<div className="d-flex justify-content-around">
 										<button onClick={() => handleVehicles(item)} className="btn btn-primary">Learn more!</button>
-										<button href="#" className="btn btn-warning">Favorites</button>
+										<button onClick={() => actions.toggleFavorites(`vehicle-${item.uid}`, item.name)} className="btn btn-warning">Favorites</button>
 									</div>
 								</div>
 							</div>

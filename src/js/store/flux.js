@@ -12,6 +12,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			vehiculos: [
 				{
 				}
+			],
+			favorites: [
 			]
 		},
 		actions: {
@@ -28,7 +30,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const response = await fetch("https://www.swapi.tech/api/people/")
 					const data = await response.json();
-					const personas = await Promise.all(data.results.map((character) => getActions().getCharactersInfo(character.uid)));
+					const personas = await Promise.all(data.results.map(async (character) => {
+						const details = await getActions().getCharactersInfo(character.uid);
+						const { properties, ...basicInfo } = details;
+						return {
+							...properties,
+							...basicInfo,
+						}
+					}));
 					setStore({ personas: personas });
 				} catch (error) {
 					console.log(error);
@@ -38,7 +47,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const response = await fetch(`https://www.swapi.tech/api/people/${id}`)
 					const data = await response.json();
-					return data.result.properties;
+					return data.result;
 				} catch (error) {
 					console.log(error);
 				}
@@ -47,7 +56,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const response = await fetch("https://www.swapi.tech/api/planets/")
 					const data = await response.json();
-					const planetas = await Promise.all(data.results.map((planet) => getActions().getPlanetsInfo(planet.uid)));
+					const planetas = await Promise.all(data.results.map(async (planet) => {
+						const details = await getActions().getPlanetsInfo(planet.uid);
+						const { properties, ...basicInfo } = details;
+						return {
+							...properties,
+							...basicInfo,
+						}
+						
+					}));
 					setStore({ planetas: planetas });
 				} catch (error) {
 					console.log(error);
@@ -66,7 +83,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const response = await fetch("https://www.swapi.tech/api/vehicles/")
 					const data = await response.json();
-					const vehiculos = await Promise.all(data.results.map((vehicles) => getActions().getVehiclesInfo(vehicles.uid)));
+					const vehiculos = await Promise.all(data.results.map(async (vehicles) => {
+						const details = await getActions().getVehiclesInfo(vehicles.uid);
+						const { properties, ...basicInfo } = details;
+						return {
+							...properties,
+							...basicInfo,
+						}
+					}));
 					setStore({ vehiculos: vehiculos });
 				} catch (error) {
 					console.log(error);
@@ -81,6 +105,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
+			toggleFavorites: (customUid, name) => {
+				const favorites = getStore().favorites;
+				const found = favorites.find((element) => element.uid === customUid);
+				if (!found) {
+					setStore({ favorites: [...favorites, { uid: customUid, name }] });
+				} else {
+					getActions().removeFavorites(customUid);
+				}
+			},
+			removeFavorites: (customUid) => {
+				const favorites = getStore();
+				setStore({ favorites: favorites.favorites.filter(element => element.uid !== customUid) });
+			}
 		},
 	}
 }
