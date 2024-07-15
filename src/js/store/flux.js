@@ -62,7 +62,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 try {
                     const response = await fetch(`https://www.swapi.tech/api/planets/${id}`);
                     const data = await response.json();
-                    return data.result.properties;
+                    return data.result;
                 } catch (error) {
                     console.log(error);
                 }
@@ -88,7 +88,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 try {
                     const response = await fetch(`https://www.swapi.tech/api/vehicles/${id}`);
                     const data = await response.json();
-                    return data.result.properties;
+                    return data.result;
                 } catch (error) {
                     console.log(error);
                 }
