@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import { Context } from "../store/appContext";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const navigate = useNavigate();
 
-	// Objeto para mapear nombres de personajes a URLs de imágenes
 	const imageMapCharacters = {
 		"Luke Skywalker": "https://starwars-visualguide.com/assets/img/characters/1.jpg",
 		"C-3PO": "https://starwars-visualguide.com/assets/img/characters/2.jpg",
