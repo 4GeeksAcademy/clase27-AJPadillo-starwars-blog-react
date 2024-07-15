@@ -1,49 +1,14 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { imageMapCharacters, imageMapPlanets, imageMapVehicles } from "../store/imagenesUrl";
+import { CharactersCard } from "../component/charactersCard";
+import { PlanetsCard } from "../component/planetsCard";
+import { VehiclesCard } from "../component/vehiclesCard";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const navigate = useNavigate();
-
-	const imageMapCharacters = {
-		"Luke Skywalker": "https://starwars-visualguide.com/assets/img/characters/1.jpg",
-		"C-3PO": "https://starwars-visualguide.com/assets/img/characters/2.jpg",
-		"R2-D2": "https://starwars-visualguide.com/assets/img/characters/3.jpg",
-		"Darth Vader": "https://starwars-visualguide.com/assets/img/characters/4.jpg",
-		"Leia Organa": "https://starwars-visualguide.com/assets/img/characters/5.jpg",
-		"Owen Lars": "https://starwars-visualguide.com/assets/img/characters/6.jpg",
-		"Beru Whitesun lars": "https://starwars-visualguide.com/assets/img/characters/7.jpg",
-		"R5-D4": "https://starwars-visualguide.com/assets/img/characters/8.jpg",
-		"Biggs Darklighter": "https://starwars-visualguide.com/assets/img/characters/9.jpg",
-		"Obi-Wan Kenobi": "https://starwars-visualguide.com/assets/img/characters/10.jpg"
-	};
-
-	const imageMapPlanets = {
-		"Tatooine": "https://static.wikia.nocookie.net/esstarwars/images/b/b0/Tatooine_TPM.png/revision/latest?cb=20131214162357",
-		"Alderaan": "https://starwars-visualguide.com/assets/img/planets/2.jpg",
-		"Yavin IV": "https://starwars-visualguide.com/assets/img/planets/3.jpg",
-		"Hoth": "https://starwars-visualguide.com/assets/img/planets/4.jpg",
-		"Dagobah": "https://starwars-visualguide.com/assets/img/planets/5.jpg",
-		"Bespin": "https://starwars-visualguide.com/assets/img/planets/6.jpg",
-		"Endor": "https://starwars-visualguide.com/assets/img/planets/7.jpg",
-		"Naboo": "https://starwars-visualguide.com/assets/img/planets/8.jpg",
-		"Coruscant": "https://starwars-visualguide.com/assets/img/planets/9.jpg",
-		"Kamino": "https://starwars-visualguide.com/assets/img/planets/10.jpg"
-	};
-
-	const imageMapVehicles = {
-		"Sand Crawler": "https://starwars-visualguide.com/assets/img/vehicles/4.jpg",
-		"T-16 skyhopper": "https://starwars-visualguide.com/assets/img/vehicles/6.jpg",
-		"X-34 landspeeder": "https://starwars-visualguide.com/assets/img/vehicles/7.jpg",
-		"TIE/LN starfighter": "https://starwars-visualguide.com/assets/img/vehicles/8.jpg",
-		"Snowspeeder": "https://starwars-visualguide.com/assets/img/vehicles/14.jpg",
-		"TIE bomber": "https://starwars-visualguide.com/assets/img/vehicles/16.jpg",
-		"AT-AT": "https://starwars-visualguide.com/assets/img/vehicles/18.jpg",
-		"AT-ST": "https://starwars-visualguide.com/assets/img/vehicles/19.jpg",
-		"Storm IV Twin-Pod cloud car": "https://starwars-visualguide.com/assets/img/vehicles/20.jpg",
-		"Sail barge": "https://starwars-visualguide.com/assets/img/vehicles/24.jpg"
-	};
 
 	const handleCharacters = (item) => {
 		navigate('/infoCharacters', { state: item });
@@ -59,67 +24,15 @@ export const Home = () => {
 		<>
 			<div className="container">
 				<h1 className="text-danger mb-4">Characters</h1>
-				<div className="row d-flex flex-nowrap flex-row overflow-scroll">
-					{store.personas.map((item, index) =>
-						<div className="col-md-3" key={index}>
-							<div className="card" style={{ height: "100%" }}>
-								<img src={imageMapCharacters[item.name]} className="card-img-top" alt="..." />
-								<div className="card-body">
-									<h5 className="card-title">{item.name}</h5>
-									<p className="card-text">Gender: {item.gender}</p>
-									<p className="card-text">Hair color: {item.hair_color}</p>
-									<p className="card-text">Eye color: {item.eye_color}</p>
-									<div className="d-flex justify-content-around">
-										<button onClick={() => handleCharacters(item)} className="btn btn-primary">Learn more!</button>
-										<button onClick={() => actions.toggleFavorites(`character-${item.uid}`, item.name)} className="btn btn-warning">Favorites</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					)}
-				</div>
+				<CharactersCard store={store} actions={actions} imageMapCharacters={imageMapCharacters} handleCharacters={handleCharacters} />
 			</div>
 			<div className="container">
 				<h1 className="text-danger mb-4">Planets</h1>
-				<div className="row d-flex flex-nowrap flex-row overflow-scroll">
-					{store.planetas.map((item, index) =>
-						<div className="col-md-3" key={index}>
-							<div className="card" style={{ height: "100%" }}>
-								<img src={imageMapPlanets[item.name]} className="card-img-top" alt="..." />
-								<div className="card-body">
-									<h5 className="card-title">{item.name}</h5>
-									<p className="card-text">Population: {item.population}</p>
-									<p className="card-text">Terrain: {item.terrain}</p>
-									<div className="d-flex justify-content-around">
-										<button onClick={() => handlePlanets(item)} className="btn btn-primary">Learn more!</button>
-										<button onClick={() => actions.toggleFavorites(`planet-${item.uid}`, item.name)} className="btn btn-warning">Favorites</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					)}
-				</div>
+				<PlanetsCard store={store} actions={actions} imageMapPlanets={imageMapPlanets} handlePlanets={handlePlanets} />
 			</div>
 			<div className="container">
 				<h1 className="text-danger mb-4">Vehicles</h1>
-				<div className="row d-flex flex-nowrap flex-row overflow-scroll">
-					{store.vehiculos.map((item, index) =>
-						<div className="col-md-3" key={index}>
-							<div className="card" style={{ height: "100%" }}>
-								<img src={imageMapVehicles[item.name]} className="card-img-top" alt="..." />
-								<div className="card-body" >
-									<h5 className="card-title">{item.name}</h5>
-									<p className="card-text">Model: {item.model}</p>
-									<p className="card-text">Length: {item.length}</p>
-									<div className="d-flex justify-content-around">
-										<button onClick={() => handleVehicles(item)} className="btn btn-primary">Learn more!</button>
-										<button onClick={() => actions.toggleFavorites(`vehicle-${item.uid}`, item.name)} className="btn btn-warning">Favorites</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					)}
-				</div>
+				<VehiclesCard store={store} actions={actions} imageMapVehicles={imageMapVehicles} handleVehicles={handleVehicles} />
 			</div>
 		</>
 	)

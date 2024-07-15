@@ -7,14 +7,15 @@ const getState = ({ getStore, getActions, setStore }) => {
             favorites: []
         },
         actions: {
-			// exampleFunction: () => {
-			// 	getActions().getCharactersInfo();
-			// },
-            loadSomeData: () => {
-                /**
-                    fetch().then().then(data => setStore({ "foo": data.bar }))
-                */
-            },
+            // exampleFunction: () => {
+            // 	getActions().getCharactersInfo();
+            // },
+
+            // loadSomeData: () => {
+            //     /**
+            //         fetch().then().then(data => setStore({ "foo": data.bar }))
+            //     */
+            // },
             getCharacters: async () => {
                 try {
                     const response = await fetch("https://www.swapi.tech/api/people/");
@@ -105,6 +106,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             removeFavorites: (customUid) => {
                 const store = getStore();
                 setStore({ favorites: store.favorites.filter(element => element.uid !== customUid) });
+            },
+            isFavorite: (uid) => {
+                const favorites = getStore().favorites;
+                return favorites.some(favorite => favorite.uid === uid);
             }
         },
     }

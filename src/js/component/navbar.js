@@ -25,7 +25,6 @@ export const Navbar = () => {
 					))) : (
 						<li className="dropdown-item">Empty</li>
 					)}
-
 				</ul>
 			</div>
 		</nav>
